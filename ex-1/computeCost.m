@@ -9,6 +9,7 @@ function J = computeCost(X, y, theta)
 J = 0;
 
 m = length(y); % number of training examples
+
 % ====================== YOUR CODE HERE ======================
 % Instructions: Compute the cost of a particular choice of theta
 %               You should set J to the cost.
