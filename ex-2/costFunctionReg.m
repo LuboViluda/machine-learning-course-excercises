@@ -8,6 +8,7 @@ function [J, grad] = costFunctionReg(theta, X, y, lambda)
 m = length(y); % number of training examples
 
 % You need to return the following variables correctly 
+
 J = 0;
 grad = zeros(size(theta));
 
@@ -23,6 +24,12 @@ J = (-y' * log(sigmoid(X*theta)) - (1 - y)' * log(1 - sigmoid(X*theta)));
 % cost function with regularized theta parameters
 J = 1/m * sum(J) + (lambda/(2*m))* sum(theta(2:end).^2);
 
+%
+ 
+grad_no_reg = (1/m) * X'* (sigmoid(X*theta) - y);
+
+grad = (1/m) * X'* (sigmoid(X*theta) - y) + (lambda/(m)) * theta;
+grad(1) = grad_no_reg(1);
 
 % =============================================================
 
