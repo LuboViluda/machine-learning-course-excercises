@@ -36,11 +36,14 @@ grad = zeros(size(theta));
 %           grad = grad + YOUR_CODE_HERE (using the temp variable)
 %
 
+% compute cost function
 J = (-y' * log(sigmoid(X*theta)) - (1 - y)' * log(1 - sigmoid(X*theta)));
 
 % cost function with regularized theta parameters
 J = 1/m * sum(J) + (lambda/(2*m))* sum(theta(2:end).^2);
 
+% prepare for compution of gradient steps with vectorication
+% strip theta0 and feature x1 (by convention x1 = 1 for all i)
 theta_to_reg = theta(2:end);
 X_to_reg = X(:,2:end);
 
