@@ -62,8 +62,7 @@ T2 = Theta2(:, 2:end); % 10 * 25
 % add regularization for theta params
 J = J + (lambda / (2 * m)) * (sum(sum(T1 .^ 2)) + sum(sum(T2 .^ 2)));
 
-% =========================================================================
-
+% compute back propagation
 d3 = A3 - Y;
 
 d2 = ((Theta2)' * d3')' .* A2 .* (1 - A2);
@@ -74,6 +73,13 @@ Theta1_grad = Theta1_grad + (d2' * X)(2:end,:);
 
 Theta1_grad = (1/m) * Theta1_grad;
 Theta2_grad = (1/m) * Theta2_grad;
+
+% add regularization for theta
+[x1, y1] = size(Theta1_grad);
+[x2, y2] = size(Theta2_grad);
+
+Theta1_grad = Theta1_grad + (lambda/m) * [zeros(x1,1) Theta1(:,2:end)];
+Theta2_grad = Theta2_grad + (lambda/m) * [zeros(x2,1) Theta2(:,2:end)];
 
 % Unroll gradients  
 grad = [Theta1_grad(:) ; Theta2_grad(:)];
