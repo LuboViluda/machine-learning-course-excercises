@@ -64,6 +64,17 @@ J = J + (lambda / (2 * m)) * (sum(sum(T1 .^ 2)) + sum(sum(T2 .^ 2)));
 
 % =========================================================================
 
+d3 = A3 - Y;
+
+d2 = ((Theta2)' * d3')' .* A2 .* (1 - A2);
+
+Theta2_grad = Theta2_grad + d3' * A2;  
+
+Theta1_grad = Theta1_grad + (d2' * X)(2:end,:);
+
+Theta1_grad = (1/m) * Theta1_grad;
+Theta2_grad = (1/m) * Theta2_grad;
+
 % Unroll gradients  
 grad = [Theta1_grad(:) ; Theta2_grad(:)];
 
