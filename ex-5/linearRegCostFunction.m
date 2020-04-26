@@ -21,7 +21,7 @@ J = (1 / (2 * m)) * sum(error_square);
 reg_param = (lambda / (2 * m)) * sum(theta(2:end).^2);
 J = J + reg_param;
 
-
+grad = (1/m) * (X' * error) + ([ zeros(1, size(theta,2)); theta(2:end, :)])* (lambda / m);
 
 
 
